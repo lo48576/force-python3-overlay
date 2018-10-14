@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+
+<repositories version="1.0">
+	<repo priority="50" quality="experimental" status="unofficial">
+		<name>force-python3</name>
+		<description>Overlay for packages with forced python3 support</description>
+        <homepage>https://github.com/lo48576/force-python3-overlay</homepage>
+		<owner>
+			<email>lo48576@hard-wi.red</email>
+		</owner>
+		<source type="git">https://github.com/lo48576/force-python3-overlay.git</source>
+	</repo>
+</repositories>
