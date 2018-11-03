@@ -6,6 +6,7 @@ EAPI=5
 # See:
 # * <https://github.com/itstool/itstool/pull/3>
 # * <http://fedora.portingdb.xyz/pkg/itstool/>
+# * <http://itstool.org/download.html>
 PYTHON_COMPAT=( python2_7 python3_{4,5,6,7} )
 PYTHON_REQ_USE="xml"
 
