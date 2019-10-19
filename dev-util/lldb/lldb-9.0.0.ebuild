@@ -46,6 +46,10 @@ BDEPEND="
 # least intrusive of all
 CMAKE_BUILD_TYPE=RelWithDebInfo
 
+PATCHES=(
+	"${FILESDIR}/${P}-python37.patch"
+)
+
 pkg_setup() {
 	LLVM_MAX_SLOT=${PV%%.*} llvm_pkg_setup
 	python-single-r1_pkg_setup
