@@ -3,8 +3,6 @@
 
 EAPI=7
 
-# Doesn't work with python3 yet:
-# https://github.com/googlei18n/nototools/issues/472
 PYTHON_COMPAT=( python2_7 python3_{5,6,7} )
 
 inherit distutils-r1
@@ -12,7 +10,7 @@ inherit distutils-r1
 DESCRIPTION="Noto fonts support tools and scripts plus web site generation"
 HOMEPAGE="https://github.com/googlei18n/nototools"
 
-COMMIT="9c4375f07c9adc00c700c5d252df6a25d7425870"
+COMMIT="b7e478c1d64a76243865f427d8e0f5ddf999986b"
 SRC_URI="https://github.com/googlei18n/nototools/archive/${COMMIT}.tar.gz#/nototools-${COMMIT}.tar.gz"
 
 LICENSE="Apache-2.0 OFL-1.1"
@@ -24,11 +22,11 @@ DEPEND=""
 BDEPEND=""
 RDEPEND="${DEPEND}
 	media-gfx/scour
-	>=dev-python/booleanOperations-0.7.0[${PYTHON_USEDEP}]
-	>=dev-python/defcon-0.3.1[${PYTHON_USEDEP}]
-	>=dev-python/fonttools-3.36.0[${PYTHON_USEDEP}]
-	>=dev-python/pillow-4.0.0[${PYTHON_USEDEP}]
-	>=dev-python/pyclipper-1.0.6[${PYTHON_USEDEP}]
+	>=dev-python/booleanOperations-0.8.2[${PYTHON_USEDEP}]
+	>=dev-python/defcon-0.6.0[${PYTHON_USEDEP}]
+	>=dev-python/fonttools-3.44.0[${PYTHON_USEDEP}]
+	>=dev-python/pillow-6.2.0[${PYTHON_USEDEP}]
+	>=dev-python/pyclipper-1.1.0[${PYTHON_USEDEP}]
 	virtual/python-typing[${PYTHON_USEDEP}]
 "
 
