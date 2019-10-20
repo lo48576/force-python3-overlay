@@ -40,6 +40,8 @@ PATCHES=(
 
 	# https://github.com/googlei18n/noto-emoji/issues/240
 	"${FILESDIR}/${PN}-20180823-build-path.patch"
+
+	"${FILESDIR}/${PN}-20191017-python3.patch"
 )
 
 src_prepare() {

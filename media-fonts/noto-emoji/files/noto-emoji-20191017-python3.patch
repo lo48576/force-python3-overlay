@@ -1,0 +1,553 @@
+diff -Naur noto-emoji-20191017.orig/add_aliases.py noto-emoji-20191017/add_aliases.py
+--- noto-emoji-20191017.orig/add_aliases.py	2019-10-17 16:04:59.000000000 +0900
++++ noto-emoji-20191017/add_aliases.py	2019-10-20 18:29:05.838033627 +0900
+@@ -144,7 +144,7 @@
+ 
+   if canonical_names:
+     print('adding %d canonical aliases' % len(canonical_to_file))
+-    for seq, f in seq_to_file.iteritems():
++    for seq, f in seq_to_file.items():
+       canonical_seq = unicode_data.get_canonical_emoji_sequence(seq)
+       if canonical_seq and canonical_seq != seq:
+         alias_name = check_alias_seq(canonical_seq)
+diff -Naur noto-emoji-20191017.orig/add_emoji_gsub.py noto-emoji-20191017/add_emoji_gsub.py
+--- noto-emoji-20191017.orig/add_emoji_gsub.py	2019-10-17 16:04:59.000000000 +0900
++++ noto-emoji-20191017/add_emoji_gsub.py	2019-10-20 18:29:05.838033627 +0900
+@@ -101,7 +101,7 @@
+     cmap = font_data.get_cmap(font)
+ 
+     ligatures = {}
+-    for output, (ch1, ch2) in table.iteritems():
++    for output, (ch1, ch2) in table.items():
+         output = cmap[output]
+         ch1 = get_glyph_name_or_create(ch1, font)
+         ch2 = get_glyph_name_or_create(ch2, font)
+diff -Naur noto-emoji-20191017.orig/add_glyphs.py noto-emoji-20191017/add_glyphs.py
+--- noto-emoji-20191017.orig/add_glyphs.py	2019-10-17 16:04:59.000000000 +0900
++++ noto-emoji-20191017/add_glyphs.py	2019-10-20 18:29:05.838033627 +0900
+@@ -66,7 +66,7 @@
+ 
+ 
+ def remap_values(seq_to_file, map_fn):
+-  return {k: map_fn(v) for k, v in seq_to_file.iteritems()}
++  return {k: map_fn(v) for k, v in seq_to_file.items()}
+ 
+ 
+ def get_png_file_to_advance_mapper(lineheight):
+@@ -280,7 +280,7 @@
+     return
+ 
+   rtl_seq_to_target_name = {
+-      get_rtl_seq(seq): name for seq, name in seq_to_target_name.iteritems()}
++      get_rtl_seq(seq): name for seq, name in seq_to_target_name.items()}
+   seq_to_target_name.update(rtl_seq_to_target_name)
+   # sequences that don't have rtl variants get mapped to the empty sequence,
+   # delete it.
+@@ -289,7 +289,7 @@
+ 
+   # organize by first codepoint in sequence
+   keyed_ligatures = collections.defaultdict(list)
+-  for t in seq_to_target_name.iteritems():
++  for t in seq_to_target_name.items():
+     first_cp = t[0][0]
+     keyed_ligatures[first_cp].append(t)
+ 
+@@ -339,7 +339,7 @@
+   source is a key in the dictionary, we can delete it.  This updates the
+   dictionary and returns the usable aliases."""
+   usable_aliases = {}
+-  for k, v in aliases.iteritems():
++  for k, v in aliases.items():
+     if v in seq_dict:
+       usable_aliases[k] = v
+       if k in seq_dict:
+diff -Naur noto-emoji-20191017.orig/check_emoji_sequences.py noto-emoji-20191017/check_emoji_sequences.py
+--- noto-emoji-20191017.orig/check_emoji_sequences.py	2019-10-17 16:04:59.000000000 +0900
++++ noto-emoji-20191017/check_emoji_sequences.py	2019-10-20 18:29:05.838033627 +0900
+@@ -51,7 +51,7 @@
+     def strip_vs_map(seq_map):
+       return {
+           unicode_data.strip_emoji_vs(k): v
+-          for k, v in seq_map.iteritems()}
++          for k, v in seq_map.items()}
+     _namedata = [
+         strip_vs_map(unicode_data.get_emoji_combining_sequences()),
+         strip_vs_map(unicode_data.get_emoji_flag_sequences()),
+@@ -76,7 +76,7 @@
+ 
+ def _check_no_vs(sorted_seq_to_filepath):
+   """Our image data does not use emoji presentation variation selectors."""
+-  for seq, fp in sorted_seq_to_filepath.iteritems():
++  for seq, fp in sorted_seq_to_filepath.items():
+     if EMOJI_VS in seq:
+       print('check no VS: FE0F in path: %s' % fp)
+ 
+@@ -99,7 +99,7 @@
+   valid_cps |= TAG_SET  # used in subregion tag sequences
+ 
+   not_emoji = {}
+-  for seq, fp in sorted_seq_to_filepath.iteritems():
++  for seq, fp in sorted_seq_to_filepath.items():
+     for cp in seq:
+       if cp not in valid_cps:
+         if cp not in not_emoji:
+@@ -121,7 +121,7 @@
+   """Ensure zwj is only between two appropriate emoji.  This is a 'pre-check'
+   that reports this specific problem."""
+ 
+-  for seq, fp in sorted_seq_to_filepath.iteritems():
++  for seq, fp in sorted_seq_to_filepath.items():
+     if ZWJ not in seq:
+       continue
+     if seq[0] == ZWJ:
+@@ -149,7 +149,7 @@
+ def _check_flags(sorted_seq_to_filepath):
+   """Ensure regional indicators are only in sequences of one or two, and
+   never mixed."""
+-  for seq, fp in sorted_seq_to_filepath.iteritems():
++  for seq, fp in sorted_seq_to_filepath.items():
+     have_reg = None
+     for cp in seq:
+       is_reg = unicode_data.is_regional_indicator(cp)
+@@ -173,7 +173,7 @@
+ 
+   BLACK_FLAG = 0x1f3f4
+   BLACK_FLAG_SET = set([BLACK_FLAG])
+-  for seq, fp in sorted_seq_to_filepath.iteritems():
++  for seq, fp in sorted_seq_to_filepath.items():
+     seq_set = set(cp for cp in seq)
+     overlap_set = seq_set & TAG_SET
+     if not overlap_set:
+@@ -193,7 +193,7 @@
+   to take them.  May appear standalone, though.  Also check that emoji that take
+   skin tone modifiers have a complete set."""
+   base_to_modifiers = collections.defaultdict(set)
+-  for seq, fp in sorted_seq_to_filepath.iteritems():
++  for seq, fp in sorted_seq_to_filepath.items():
+     for i, cp in enumerate(seq):
+       if unicode_data.is_skintone_modifier(cp):
+         if i == 0:
+@@ -213,7 +213,7 @@
+             base_to_modifiers[pcp] = set()
+           base_to_modifiers[pcp].add(cp)
+ 
+-  for cp, modifiers in sorted(base_to_modifiers.iteritems()):
++  for cp, modifiers in sorted(base_to_modifiers.items()):
+     if len(modifiers) != 5:
+       print(
+           'check skintone: base %04x has %d modifiers defined (%s) in %s' % (
+@@ -224,7 +224,7 @@
+ 
+ def _check_zwj_sequences(sorted_seq_to_filepath, unicode_version):
+   """Verify that zwj sequences are valid for the given unicode version."""
+-  for seq, fp in sorted_seq_to_filepath.iteritems():
++  for seq, fp in sorted_seq_to_filepath.items():
+     if ZWJ not in seq:
+       continue
+     age = unicode_data.get_emoji_sequence_age(seq)
+@@ -236,7 +236,7 @@
+   """Check that we don't have sequences that we expect to be aliased to
+   some other sequence."""
+   aliases = add_aliases.read_default_emoji_aliases()
+-  for seq, fp in sorted_seq_to_filepath.iteritems():
++  for seq, fp in sorted_seq_to_filepath.items():
+     if seq in aliases:
+       print('check no alias sources: aliased sequence %s' % fp)
+ 
+@@ -285,7 +285,7 @@
+ 
+   # combining sequences
+   comb_seq_to_name = sorted(
+-      unicode_data.get_emoji_combining_sequences(age=age).iteritems())
++      unicode_data.get_emoji_combining_sequences(age=age).items())
+   for seq, name in comb_seq_to_name:
+     if seq not in seq_to_filepath:
+       # strip vs and try again
+@@ -296,7 +296,7 @@
+ 
+   # flag sequences
+   flag_seq_to_name = sorted(
+-      unicode_data.get_emoji_flag_sequences(age=age).iteritems())
++      unicode_data.get_emoji_flag_sequences(age=age).items())
+   for seq, name in flag_seq_to_name:
+     if seq not in seq_to_filepath:
+       print('coverage: missing flag sequence %s (%s)' %
+@@ -304,7 +304,7 @@
+ 
+   # skin tone modifier sequences
+   mod_seq_to_name = sorted(
+-      unicode_data.get_emoji_modifier_sequences(age=age).iteritems())
++      unicode_data.get_emoji_modifier_sequences(age=age).items())
+   for seq, name in mod_seq_to_name:
+     if seq not in seq_to_filepath:
+       print('coverage: missing modifier sequence %s (%s)' % (
+@@ -323,7 +323,7 @@
+     zwj_seq_without_vs.add(seq)
+ 
+   for seq, name in sorted(
+-      unicode_data.get_emoji_zwj_sequences(age=age).iteritems()):
++      unicode_data.get_emoji_zwj_sequences(age=age).items()):
+     if EMOJI_VS in seq:
+       test_seq = tuple(s for s in seq if s != EMOJI_VS)
+     else:
+@@ -360,7 +360,7 @@
+   of a name to stderr."""
+   segment_re = re.compile(r'^[0-9a-f]{4,6}$')
+   result = {}
+-  for name, dirname in name_to_dirpath.iteritems():
++  for name, dirname in name_to_dirpath.items():
+     if not name.startswith(prefix):
+       print('expected prefix "%s" for "%s"' % (prefix, name))
+       continue
+diff -Naur noto-emoji-20191017.orig/generate_emoji_html.py noto-emoji-20191017/generate_emoji_html.py
+--- noto-emoji-20191017.orig/generate_emoji_html.py	2019-10-17 16:04:59.000000000 +0900
++++ noto-emoji-20191017/generate_emoji_html.py	2019-10-20 18:29:05.838033627 +0900
+@@ -181,7 +181,7 @@
+ 
+   # now we need to invert the map
+   aux_info = collections.defaultdict(set)
+-  for key, index in target_key_to_info_index.iteritems():
++  for key, index in target_key_to_info_index.items():
+     aux_info[index].add(key)
+ 
+   return aux_info
+@@ -352,7 +352,7 @@
+ 
+ 
+ def _add_aliases(keys, aliases):
+-  for k, v in sorted(aliases.iteritems()):
++  for k, v in sorted(aliases.items()):
+     k_str = unicode_data.seq_to_string(k)
+     v_str = unicode_data.seq_to_string(v)
+     if k in keys:
+@@ -360,7 +360,7 @@
+       print('have alias image %s, should use %s%s' % (k_str, v_str, msg))
+     elif v not in keys:
+       print('can\'t use alias %s, no image matching %s' % (k_str, v_str))
+-  to_add = {k for k, v in aliases.iteritems() if k not in keys and v in keys}
++  to_add = {k for k, v in aliases.items() if k not in keys and v in keys}
+   return keys | to_add
+ 
+ 
+@@ -399,7 +399,7 @@
+ 
+ 
+ def _generate_info_text(args):
+-  lines = ['%s: %r' % t for t in sorted(args.__dict__.iteritems())]
++  lines = ['%s: %r' % t for t in sorted(args.__dict__.items())]
+   lines.append('generated by %s on %s' % (
+       path.basename(__file__), datetime.datetime.now()))
+   return '\n  '.join(lines)
+@@ -546,7 +546,7 @@
+   def canon(seq):
+     return unicode_data.get_canonical_emoji_sequence(seq) or seq
+   aliases = add_aliases.read_default_emoji_aliases()
+-  return {canon(k): canon(v) for k, v in aliases.iteritems()}
++  return {canon(k): canon(v) for k, v in aliases.items()}
+ 
+ def _get_canonical_excluded():
+   def canon(seq):
+diff -Naur noto-emoji-20191017.orig/generate_emoji_thumbnails.py noto-emoji-20191017/generate_emoji_thumbnails.py
+--- noto-emoji-20191017.orig/generate_emoji_thumbnails.py	2019-10-17 16:04:59.000000000 +0900
++++ noto-emoji-20191017/generate_emoji_thumbnails.py	2019-10-20 18:29:05.839033620 +0900
+@@ -59,12 +59,12 @@
+   inv_aliases = collections.defaultdict(list)
+ 
+   standard_aliases = add_aliases.read_default_emoji_aliases()
+-  for k, v in standard_aliases.iteritems():
++  for k, v in standard_aliases.items():
+     inv_aliases[v].append(k)
+ 
+   unknown_flag_aliases = add_aliases.read_emoji_aliases(
+       'unknown_flag_aliases.txt')
+-  for k, v in unknown_flag_aliases.iteritems():
++  for k, v in unknown_flag_aliases.items():
+     inv_aliases[v].append(k)
+ 
+   return inv_aliases
+diff -Naur noto-emoji-20191017.orig/map_pua_emoji.py noto-emoji-20191017/map_pua_emoji.py
+--- noto-emoji-20191017.orig/map_pua_emoji.py	2019-10-17 16:04:59.000000000 +0900
++++ noto-emoji-20191017/map_pua_emoji.py	2019-10-20 18:33:47.464248920 +0900
+@@ -19,6 +19,7 @@
+ __author__ = 'roozbeh@google.com (Roozbeh Pournader)'
+ 
+ import sys
++import itertools
+ 
+ from fontTools import ttLib
+ 
+@@ -53,8 +54,8 @@
+     """Add PUA characters to the cmap of the first font and save as second."""
+     font = ttLib.TTFont(source_file)
+     cmap = font_data.get_cmap(font)
+-    for pua, (ch1, ch2) in (add_emoji_gsub.EMOJI_KEYCAPS.items()
+-                            + add_emoji_gsub.EMOJI_FLAGS.items()):
++    for pua, (ch1, ch2) in itertools.chain(add_emoji_gsub.EMOJI_KEYCAPS.items(),
++                            add_emoji_gsub.EMOJI_FLAGS.items()):
+         if pua not in cmap:
+             glyph_name = get_glyph_name_from_gsub([ch1, ch2], font)
+             if glyph_name is not None:
+diff -Naur noto-emoji-20191017.orig/strip_vs_from_filenames.py noto-emoji-20191017/strip_vs_from_filenames.py
+--- noto-emoji-20191017.orig/strip_vs_from_filenames.py	2019-10-17 16:04:59.000000000 +0900
++++ noto-emoji-20191017/strip_vs_from_filenames.py	2019-10-20 18:29:05.839033620 +0900
+@@ -57,7 +57,7 @@
+         return
+       renames[name] = newname
+ 
+-  for k, v in renames.iteritems():
++  for k, v in renames.items():
+     if dry_run:
+       print('%s -> %s' % (k, v))
+     else:
+diff -Naur noto-emoji-20191017.orig/third_party/color_emoji/emoji_builder.py noto-emoji-20191017/third_party/color_emoji/emoji_builder.py
+--- noto-emoji-20191017.orig/third_party/color_emoji/emoji_builder.py	2019-10-17 16:04:59.000000000 +0900
++++ noto-emoji-20191017/third_party/color_emoji/emoji_builder.py	2019-10-20 19:45:12.848856086 +0900
+@@ -19,11 +19,16 @@
+ 
+ 
+ from __future__ import print_function
+-import sys, struct, StringIO
++import sys, struct
+ from png import PNG
+ import os
+ from os import path
+ 
++try:
++    unichr
++except NameError:
++    unichr = chr
++
+ from nototools import font_data
+ 
+ def get_glyph_name_from_gsub (string, font, cmap_dict):
+@@ -87,7 +92,7 @@
+ 		write_func = self.image_write_func (image_format)
+ 		for glyph in glyphs:
+ 			img_file = glyph_filenames[glyph]
+-                        # print 'writing data for glyph %s' % path.basename(img_file)
++			# print 'writing data for glyph %s' % path.basename(img_file)
+ 			offset = self.tell ()
+ 			write_func (PNG (img_file))
+ 			self.glyph_maps.append (GlyphMap (glyph, offset, image_format))
+@@ -112,9 +117,9 @@
+ 		line_height = (ascent + descent) * y_ppem / float (upem)
+ 		line_ascent = ascent * y_ppem / float (upem)
+ 		y_bearing = int (round (line_ascent - .5 * (line_height - height)))
+-                # fudge y_bearing if calculations are a bit off
+-                if y_bearing == 128:
+-                  y_bearing = 127
++		# fudge y_bearing if calculations are a bit off
++		if y_bearing == 128:
++			y_bearing = 127
+ 		advance = width
+ 
+ 		vert_x_bearing = - width / 2
+@@ -129,26 +134,26 @@
+ 		# CHAR	horiBearingX
+ 		# CHAR	horiBearingY
+ 		# BYTE	horiAdvance
+-                # add for bigGlyphMetrics:
++		# add for bigGlyphMetrics:
+ 		# CHAR	vertBearingX
+ 		# CHAR	vertBearingY
+ 		# BYTE	vertAdvance
+-                try:
+-                  if big_metrics:
+-                        self.write (struct.pack ("BBbbBbbB",
++		try:
++			if big_metrics:
++				self.write (struct.pack ("BBbbBbbB",
+ 					 height, width,
+ 					 x_bearing, y_bearing,
+ 					 advance,
+ 					 vert_x_bearing, vert_y_bearing,
+ 					 vert_advance))
+-                  else:
+-                        self.write (struct.pack ("BBbbB",
++			else:
++				self.write (struct.pack ("BBbbB",
+ 					 height, width,
+ 					 x_bearing, y_bearing,
+ 					 advance))
+-                except Exception as e:
+-                  raise ValueError("%s, h: %d w: %d x: %d y: %d %d a:" % (
+-                      e, height, width, x_bearing, y_bearing, advance))
++		except Exception as e:
++			raise ValueError("%s, h: %d w: %d x: %d y: %d %d a:" % (
++				e, height, width, x_bearing, y_bearing, advance))
+ 
+ 	def write_format1 (self, png):
+ 
+@@ -179,13 +184,13 @@
+ 				self.write (pixel)
+ 			offset += stride
+ 
+-	png_allowed_chunks =  ["IHDR", "PLTE", "tRNS", "sRGB", "IDAT", "IEND"]
++	png_allowed_chunks =  [b"IHDR", b"PLTE", b"tRNS", b"sRGB", b"IDAT", b"IEND"]
+ 
+ 	def write_format17 (self, png):
+-                self.write_format17or18(png, False)
++		self.write_format17or18(png, False)
+ 
+-        def write_format18 (self, png):
+-                self.write_format17or18(png, True)
++	def write_format18 (self, png):
++		self.write_format17or18(png, True)
+ 
+ 	def write_format17or18 (self, png, big_metrics):
+ 		width, height = png.get_size ()
+@@ -202,7 +207,7 @@
+ 
+ 	def image_write_func (self, image_format):
+ 		if image_format == 1: return self.write_format1
+-                if image_format == 17: return self.write_format17
++		if image_format == 17: return self.write_format17
+ 		if image_format == 18: return self.write_format18
+ 		return None
+ 
+@@ -389,7 +394,7 @@
+ 		"-V": "verbose",
+ 		"-O": "keep_outlines",
+ 		"-U": "uncompressed",
+-                "-S": "small_glyph_metrics",
++		"-S": "small_glyph_metrics",
+ 		"-C": "keep_chunks",
+ 	}
+ 
+@@ -441,7 +446,7 @@
+ 
+ 	def add_font_table (font, tag, data):
+ 		tab = ttLib.tables.DefaultTable.DefaultTable (tag)
+-		tab.data = str(data)
++		tab.data = data
+ 		font[tag] = tab
+ 
+ 	def drop_outline_tables (font):
+@@ -470,7 +475,7 @@
+ 		raise Exception ("Failed to find a Unicode cmap.")
+ 
+ 	image_format = 1 if 'uncompressed' in options else (17
+-                if 'small_glyph_metrics' in options else 18)
++		if 'small_glyph_metrics' in options else 18)
+ 
+ 	ebdt = CBDT (font_metrics, options)
+ 	ebdt.write_header ()
+@@ -478,8 +483,8 @@
+ 	eblc.write_header ()
+ 	eblc.start_strikes (len (img_prefixes))
+ 
+-        def is_vs(cp):
+-                return cp >= 0xfe00 and cp <= 0xfe0f
++	def is_vs(cp):
++		return cp >= 0xfe00 and cp <= 0xfe0f
+ 
+ 	for img_prefix in img_prefixes:
+ 		print()
+@@ -491,13 +496,13 @@
+ 			codes = img_file[len (img_prefix):-4]
+ 			if "_" in codes:
+ 				pieces = codes.split ("_")
+-                                cps = [int(code, 16) for code in pieces]
++				cps = [int(code, 16) for code in pieces]
+ 				uchars = "".join ([unichr(cp) for cp in cps if not is_vs(cp)])
+ 			else:
+-                                cp = int(codes, 16)
+-                                if is_vs(cp):
+-                                        print("ignoring unexpected vs input %04x" % cp)
+-                                        continue
++				cp = int(codes, 16)
++				if is_vs(cp):
++					print("ignoring unexpected vs input %04x" % cp)
++					continue
+ 				uchars = unichr(cp)
+ 			img_files[uchars] = img_file
+ 		if not img_files:
+@@ -508,11 +513,11 @@
+ 		advance = width = height = 0
+ 		for uchars, img_file in img_files.items ():
+ 			if len (uchars) == 1:
+-                                try:
+-                                        glyph_name = unicode_cmap.cmap[ord (uchars)]
+-                                except:
+-                                        print("no cmap entry for %x" % ord(uchars))
+-                                        raise ValueError("%x" % ord(uchars))
++				try:
++					glyph_name = unicode_cmap.cmap[ord (uchars)]
++				except:
++					print("no cmap entry for %x" % ord(uchars))
++					raise ValueError("%x" % ord(uchars))
+ 			else:
+ 				glyph_name = get_glyph_name_from_gsub (uchars, font, unicode_cmap.cmap)
+ 			glyph_id = font.getGlyphID (glyph_name)
+@@ -520,7 +525,7 @@
+ 			if "verbose" in options:
+ 				uchars_name = ",".join (["%04X" % ord (char) for char in uchars])
+ 				# print "Matched U+%s: id=%d name=%s image=%s" % (
+-                                #    uchars_name, glyph_id, glyph_name, img_file)
++				#    uchars_name, glyph_id, glyph_name, img_file)
+ 
+ 			advance += glyph_metrics[glyph_name][0]
+ 			w, h = PNG (img_file).get_size ()
+@@ -558,10 +563,10 @@
+ 		drop_outline_tables (font)
+ 		print("Dropped outline ('glyf', 'CFF ') and related tables.")
+ 
+-        # hack removal of cmap pua entry for unknown flag glyph.  If we try to
+-        # remove it earlier, getGlyphID dies.  Need to restructure all of this
+-        # code.
+-        font_data.delete_from_cmap(font, [0xfe82b])
++	# hack removal of cmap pua entry for unknown flag glyph.  If we try to
++	# remove it earlier, getGlyphID dies.  Need to restructure all of this
++	# code.
++	font_data.delete_from_cmap(font, [0xfe82b])
+ 
+ 	font.save (out_file)
+ 	print("Output font '%s' generated." % out_file)
+diff -Naur noto-emoji-20191017.orig/third_party/color_emoji/png.py noto-emoji-20191017/third_party/color_emoji/png.py
+--- noto-emoji-20191017.orig/third_party/color_emoji/png.py	2019-10-17 16:04:59.000000000 +0900
++++ noto-emoji-20191017/third_party/color_emoji/png.py	2019-10-20 19:47:54.367806021 +0900
+@@ -17,7 +17,8 @@
+ # Google Author(s): Behdad Esfahbod
+ #
+ 
+-import struct, StringIO
++import struct
++from io import BytesIO
+ 
+ 
+ class PNG:
+@@ -26,7 +27,7 @@
+ 
+ 	def __init__ (self, f):
+ 
+-		if isinstance(f, basestring):
++		if (isinstance(f, str) or isinstance(f, type(u''))):
+ 			f = open (f, 'rb')
+ 
+ 		self.f = f
+@@ -67,7 +68,7 @@
+ 
+ 	def read_IHDR (self):
+ 		(chunk_type, chunk_data, crc) = self.read_chunk ()
+-		if chunk_type != "IHDR":
++		if chunk_type != b"IHDR":
+ 			raise PNG.BadChunk
+ 		#  Width:              4 bytes
+ 		#  Height:             4 bytes
+@@ -93,7 +94,7 @@
+ 
+ 	def filter_chunks (self, chunks):
+ 		self.seek (0);
+-		out = StringIO.StringIO ()
++		out = BytesIO ()
+ 		out.write (self.read_signature ())
+ 		while True:
+ 			chunk_type, chunk_data, crc = self.read_chunk ()
+@@ -102,6 +103,6 @@
+ 				out.write (chunk_type)
+ 				out.write (chunk_data)
+ 				out.write (crc)
+-			if chunk_type == "IEND":
++			if chunk_type == b"IEND":
+ 				break
+ 		return PNG (out)
