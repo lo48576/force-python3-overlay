@@ -1,0 +1,46 @@
+diff -Naur GConf-3.2.6.orig/gsettings/gsettings-schema-convert GConf-3.2.6/gsettings/gsettings-schema-convert
+--- GConf-3.2.6.orig/gsettings/gsettings-schema-convert	2012-04-10 08:58:44.000000000 +0900
++++ GConf-3.2.6/gsettings/gsettings-schema-convert	2019-10-21 02:37:05.493377231 +0900
+@@ -603,7 +603,7 @@
+             for line in lines:
+                 current_line_nb += 1
+                 self.parse_line(line)
+-        except GSettingsSchemaConvertException, e:
++        except (GSettingsSchemaConvertException, e):
+             raise GSettingsSchemaConvertException('%s:%s: %s' % (os.path.basename(self.file), current_line_nb, e))
+ 
+         return self.root
+@@ -1095,7 +1095,7 @@
+             try:
+                 parser = GConfSchemaParser(argfile, options.gettext_domain, options.schema_id, options.keep_underscores)
+                 schema_root = parser.parse()
+-            except SyntaxError, e:
++            except (SyntaxError, e):
+                 raise GSettingsSchemaConvertException('\'%s\' does not look like a valid gconf schema file: %s' % (argfile, e))
+         else:
+             # autodetect if file is XML or not
+@@ -1104,7 +1104,7 @@
+                 schema_root = parser.parse()
+                 if not options.simple and not options.xml:
+                     options.simple = True
+-            except SyntaxError, e:
++            except (SyntaxError, e):
+                 parser = SimpleSchemaParser(argfile)
+                 schema_root = parser.parse()
+                 if not options.simple and not options.xml:
+@@ -1127,13 +1127,13 @@
+                 fout = open(options.output, 'w')
+                 fout.write(output)
+                 fout.close()
+-            except GSettingsSchemaConvertException, e:
++            except (GSettingsSchemaConvertException, e):
+                 fout.close()
+                 if os.path.exists(options.output):
+                     os.unlink(options.output)
+                 raise e
+ 
+-    except GSettingsSchemaConvertException, e:
++    except (GSettingsSchemaConvertException, e):
+         print >> sys.stderr, '%s' % e
+         return 1
+ 
