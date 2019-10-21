@@ -9,6 +9,9 @@ Use at your own risk.
 
 Packages which already (probably) supports Python 3 and/or Python 3.7.
 
+* app-crypt/gcr-3.34.0
+    + This version is not in gentoo repo.
+    + Dependencies changed from 3.28.1.
 * dev-python/cgroup-utils-0.6
 * dev-python/nototools-20191017
     + This version is not in gentoo repo.
