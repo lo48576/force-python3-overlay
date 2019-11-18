@@ -15,8 +15,6 @@ Packages which already (probably) supports Python 3 and/or Python 3.7.
 * dev-python/cgroup-utils-0.6
 * dev-python/nototools-20191017
     + This version is not in gentoo repo.
-* dev-util/itstool-2.0.5
-    + This version is not in gentoo repo.
 * dev-util/vulkan-tools-1.1.106-r1
 * media-gfx/scour-0.36
 * media-libs/libmypaint-1.4.0
