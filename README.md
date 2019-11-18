@@ -16,7 +16,6 @@ Packages which already (probably) supports Python 3 and/or Python 3.7.
 * dev-python/nototools-20191017
     + This version is not in gentoo repo.
 * media-libs/libmypaint-1.4.0
-* media-libs/shaderc-2019.0
 * media-libs/vulkan-layers-1.1.106
 * media-libs/vulkan-loader-1.1.125
 * x11-misc/compton-0.1\_beta2
