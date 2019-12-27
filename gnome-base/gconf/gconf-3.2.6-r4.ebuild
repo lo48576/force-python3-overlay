@@ -5,7 +5,7 @@ EAPI="5"
 GCONF_DEBUG="yes"
 GNOME_ORG_MODULE="GConf"
 GNOME2_LA_PUNT="yes"
-PYTHON_COMPAT=( python{2_7,3_{5,6,7}} )
+PYTHON_COMPAT=( python{2_7,3_{5,6,7,8}} )
 PYTHON_REQ_USE="xml"
 
 inherit eutils gnome2 multilib-minimal python-r1
