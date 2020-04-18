@@ -9,9 +9,9 @@ Use at your own risk.
 
 Packages which already (probably) supports Python 3 and/or Python 3.7.
 
-* app-crypt/gcr-3.34.0
+* dev-libs/zziplib-0.13.70
     + This version is not in gentoo repo.
-    + Dependencies changed from 3.28.1.
+    + Some patches are applied.
 * dev-python/nototools-20191017
     + This version is not in gentoo repo.
 * media-libs/libmypaint-1.4.0
@@ -25,14 +25,6 @@ These packages are patched to make it work.
 **USE AT YOUR OWN RISK**.
 I don't like and don't know Python, and they can have new errors or bugs.
 
-* dev-libs/zziplib-0.13.69\_p20190804
-    + This version is not in gentoo repo.
-    * Docs generator scripts are patched
-      ([`zziplib-0.13.69_p20190804-pr83.patch`](dev-libs/zziplib/files/zziplib-0.13.69_p20190804-pr83.patch)).
-        - This is [pull request #83](https://github.com/gdraheim/zziplib/pull/83), retrieved at 2019-10-21.
-* dev-util/lldb-9.0.0
-    + A CMake build script and a python script (only used during build) are modified
-      ([`lldb-9.0.0-python37.patch`](dev-util/lldb/files/lldb-9.0.0-python37.patch)).
 * gnome-base/gconf-3.2.6-r4
     + `gsettings-schema-convert` script is modified
       ([`gconf-3.2.6-python3.patch`](gnome-base/gconf/files/gconf-3.2.6-python3.patch)).
