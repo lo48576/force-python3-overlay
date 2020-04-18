@@ -14,7 +14,6 @@ Packages which already (probably) supports Python 3 and/or Python 3.7.
     + Some patches are applied.
 * dev-python/nototools-20191017
     + This version is not in gentoo repo.
-* media-libs/libmypaint-1.4.0
 * x11-misc/compton-0.1\_beta2
 
 ### Patches added to port to python 3 (and/or python 3.7)
