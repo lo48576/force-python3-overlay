@@ -5,9 +5,9 @@ Use at your own risk.
 
 ## Packages
 
-### Simply marked as supporting python 3 (and/or python 3.7)
+### Simply marked as supporting python 3 (and/or python 3.8)
 
-Packages which already (probably) supports Python 3 and/or Python 3.7.
+Packages which already (probably) supports Python 3 and/or Python 3.8.
 
 * dev-libs/zziplib-0.13.70
     + This version is not in gentoo repo.
@@ -15,9 +15,9 @@ Packages which already (probably) supports Python 3 and/or Python 3.7.
 * dev-python/nototools-20191017
     + This version is not in gentoo repo.
 
-### Patches added to port to python 3 (and/or python 3.7)
+### Patches added to port to python 3 (and/or python 3.8)
 
-Packages which does not work with Python 3 and/or Python 3.7.
+Packages which does not work with Python 3 and/or Python 3.8.
 These packages are patched to make it work.
 
 **USE AT YOUR OWN RISK**.
