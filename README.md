@@ -14,6 +14,7 @@ Packages which already (probably) supports Python 3 and/or Python 3.8.
     + Some patches are applied.
 * dev-python/nototools-20191017
     + This version is not in gentoo repo.
+* dev-python/crcmod-1.7-r3
 
 ### Patches added to port to python 3 (and/or python 3.8)
 
