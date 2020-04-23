@@ -18,6 +18,7 @@ Packages which already (probably) supports Python 3 and/or Python 3.8.
     + This version is not in gentoo repo.
 * dev-python/python-evdev-1.1.2-r1
 * games-util/lutris-0.5.6
+* net-wireless/blueman-2.1.2
 * sys-power/acpilight-1.2
 
 ### Patches added to port to python 3 (and/or python 3.8)
