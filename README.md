@@ -9,6 +9,7 @@ Use at your own risk.
 
 Packages which already (probably) supports Python 3 and/or Python 3.8.
 
+* app-admin/ansible-2.9.7
 * dev-libs/zziplib-0.13.70
     + This version is not in gentoo repo.
     + Some patches are applied.
