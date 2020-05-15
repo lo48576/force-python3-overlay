@@ -10,6 +10,7 @@ Use at your own risk.
 Packages which already (probably) supports Python 3 and/or Python 3.8.
 
 * app-admin/ansible-2.9.7
+* app-admin/ansible-2.9.9
 * dev-java/java-config-2.2.0-r4
 * dev-libs/zziplib-0.13.70
     + This version is not in gentoo repo.
