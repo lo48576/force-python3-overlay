@@ -5,9 +5,9 @@ Use at your own risk.
 
 ## Packages
 
-### Simply marked as supporting python 3 (and/or python 3.8)
+### Simply marked as supporting python 3 (and/or python 3.9)
 
-Packages which already (probably) supports Python 3 and/or Python 3.8.
+Packages which already (probably) supports Python 3 and/or Python 3.9.
 
 * app-admin/ansible-2.9.7
 * app-admin/ansible-2.9.9
@@ -22,9 +22,9 @@ Packages which already (probably) supports Python 3 and/or Python 3.8.
 * net-wireless/blueman-2.1.3
 * sys-power/acpilight-1.2
 
-### Patches added to port to python 3 (and/or python 3.8)
+### Patches added to port to python 3 (and/or python 3.9)
 
-Packages which does not work with Python 3 and/or Python 3.8.
+Packages which does not work with Python 3 and/or Python 3.9.
 These packages are patched to make it work.
 
 **USE AT YOUR OWN RISK**.
