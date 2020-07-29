@@ -19,6 +19,8 @@ Packages which already (probably) supports Python 3 and/or Python 3.9.
 * dev-python/crcmod-1.7-r3
 * games-util/lutris-0.5.6
 * net-libs/webkit-gtk-2.28.2
+* net-libs/webkit-gtk-2.28.3
+* net-libs/webkit-gtk-2.28.4
 * net-wireless/blueman-2.1.2
 * net-wireless/blueman-2.1.3
 * sys-power/acpilight-1.2
