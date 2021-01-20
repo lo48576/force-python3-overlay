@@ -10,7 +10,7 @@ Use at your own risk.
 Packages which already (probably) supports Python 3 and/or Python 3.9.
 
 * app-emulation/virtualbox-6.1.16-r1
-* dev-python/crcmod-1.7-r3
+* dev-python/crcmod-1.7-r4
 * dev-util/gtk-doc-1.32-r2
 * games-util/lutris-0.5.6
 * net-libs/webkit-gtk-2.28.2
