@@ -10,7 +10,6 @@ Use at your own risk.
 Packages which already (probably) supports Python 3 and/or Python 3.9.
 
 * app-emulation/virtualbox-6.1.16-r1
-* dev-java/java-config-2.2.0-r4
 * dev-libs/zziplib-0.13.70
     + This version is not in gentoo repo.
     + Some patches are applied.
