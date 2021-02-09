@@ -17,7 +17,7 @@ Packages which already (probably) supports Python 3 and/or Python 3.9.
 * net-libs/webkit-gtk-2.30.3
 * net-libs/webkit-gtk-2.30.4-r1
 * net-wireless/blueman-2.1.4
-* sys-power/acpilight-1.2
+* sys-power/acpilight-1.2-r1
 
 ### Patches added to port to python 3 (and/or python 3.9)
 

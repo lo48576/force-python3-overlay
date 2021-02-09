@@ -3,9 +3,9 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{6,7,8,9} )
+PYTHON_COMPAT=( python3_7 python3_8 python3_9 )
 
-inherit python-r1 udev
+inherit python-single-r1 udev
 
 MY_P="${PN}-v${PV}"
 
@@ -30,7 +30,7 @@ DOCS=( README.rst NEWS.rst )
 src_compile() { :; }
 
 src_install() {
-	python_foreach_impl python_doscript xbacklight
+	python_doscript xbacklight
 	udev_dorules "${S}"/90-backlight.rules
 	doman xbacklight.1
 	einstalldocs
