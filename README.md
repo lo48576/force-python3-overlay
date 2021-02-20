@@ -14,8 +14,7 @@ Packages which already (probably) supports Python 3 and/or Python 3.9.
 * dev-libs/libgusb-0.3.5
 * dev-python/crcmod-1.7-r4
 * media-libs/graphene-1.1.02
-* net-libs/webkit-gtk-2.30.3
-* net-libs/webkit-gtk-2.30.4-r1
+* net-libs/webkit-gtk-2.30.5
 * net-wireless/blueman-2.1.4
 * sys-power/acpilight-1.2-r1
 
