@@ -26,6 +26,4 @@ These packages are patched to make it work.
 **USE AT YOUR OWN RISK**.
 I don't like and don't know Python, and they can have new errors or bugs.
 
-* gnome-base/gconf-3.2.6-r4
-    + `gsettings-schema-convert` script is modified
-      ([`gconf-3.2.6-python3.patch`](gnome-base/gconf/files/gconf-3.2.6-python3.patch)).
+(N/A for now)
