@@ -9,7 +9,7 @@ Use at your own risk.
 
 Packages which already (probably) supports Python 3 and/or Python 3.9.
 
-* sys-power/acpilight-1.2-r1
+(N/A for now)
 
 ### Patches added to port to python 3 (and/or python 3.9)
 
