@@ -9,8 +9,6 @@ Use at your own risk.
 
 Packages which already (probably) supports Python 3 and/or Python 3.9.
 
-* app-emulation/virtualbox-6.1.16-r1
-* app-emulation/virtualbox-6.1.18
 * dev-libs/libgusb-0.3.5
 * dev-python/crcmod-1.7-r4
 * media-libs/graphene-1.1.02
