@@ -9,7 +9,6 @@ Use at your own risk.
 
 Packages which already (probably) supports Python 3 and/or Python 3.9.
 
-* dev-libs/libgusb-0.3.5
 * dev-python/crcmod-1.7-r4
 * media-libs/graphene-1.1.02
 * net-libs/webkit-gtk-2.30.5
