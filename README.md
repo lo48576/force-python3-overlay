@@ -9,8 +9,6 @@ Use at your own risk.
 
 Packages which already (probably) supports Python 3 and/or Python 3.9.
 
-* net-libs/webkit-gtk-2.30.5
-* net-libs/webkit-gtk-2.30.6
 * sys-power/acpilight-1.2-r1
 
 ### Patches added to port to python 3 (and/or python 3.9)
