@@ -9,7 +9,6 @@ Use at your own risk.
 
 Packages which already (probably) supports Python 3 and/or Python 3.9.
 
-* media-libs/graphene-1.1.02
 * net-libs/webkit-gtk-2.30.5
 * net-libs/webkit-gtk-2.30.6
 * sys-power/acpilight-1.2-r1
